@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Λίστα υποχρεώσεων</title>
+        <meta charset="utf-8">
+       
+          
+        <style>
+            li{cursor: pointer}
+        </style>
+        
+    </head>
+    <body>
+       <h1>Να μην ξεχασω:</h1>
+      <label for="add">Νέο:</label>  <input type="text" id="txt">
+        <button onclick="addLI()">Προσθηκη</button>
+         
+        <button onclick="deleteLI()">Διαγραφη</button>
+        <h2><span id="nbr">0</span> Υποχρεώσεις</h2>
+        <ul id="list"></ul>
+        
+        <script>
+
+
+        	let counter=0;
+
+        	
+            
+            var inputText = document.getElementById("txt"),
+                 items = document.querySelectorAll("#list li"),
+                 tab = [], index;
+         
+             // get the selected li index using array
+             // populate array with li values
+             
+             for(var i = 0; i < items.length; i++){
+                 tab.push(items[i].innerHTML);
+             }
+             
+             // get li index onclick
+             for(var i = 0; i < items.length; i++){
+                 
+                 items[i].onclick = function(){
+                     index = tab.indexOf(this.innerHTML);
+                     console.log(this.innerHTML + " INDEX = " + index);
+                     // set the selected li value into input text
+                     inputText.value = this.innerHTML;
+                 };
+                 
+             }
+            
+            
+            function addLI(){
+                
+                let listNode = document.getElementById("list");
+                let textNode = document.createTextNode(inputText.value);
+                let liNode = document.createElement("LI");
+                    
+                    liNode.appendChild(textNode);
+                    listNode.appendChild(liNode);
+                    counter=counter+1;
+                    document.getElementById('nbr').innerHTML = counter;
+                    
+                   
+                    
+                   
+                    
+                  
+                    
+             }
+             
+            
+              
+              function deleteLI(){
+                  
+                      
+                      if(items.length > 0){
+                          items[index].parentNode.removeChild(items[index]);
+                          inputText.value = "";
+                      }
+
+                      counter=counter-1;
+                      document.getElementById('nbr').innerHTML = counter;
+              }
+            
+        </script>
+        
+    </body>
+</html>
